@@ -1,10 +1,16 @@
 package org.usfirst.frc.team6705.robot;
 
+import org.usfirst.frc.team6705.robot.Constants;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,10 +26,14 @@ public class Robot extends IterativeRobot {
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
 	
-	Spark leftDriveTrain = new Spark(1);
-	Spark rightDriveTrain = new Spark(2);
+	Spark leftDriveTrain = new Spark(Constants.LEFT_MOTOR);
+	Spark rightDriveTrain = new Spark(Constants.RIGHT_MOTOR);
 	RobotDrive robotDrive = new RobotDrive(leftDriveTrain, rightDriveTrain);
 	
+	Joystick leftStick = new Joystick(Constants.LEFT_STICK);
+	Joystick rightStick = new Joystick(Constants.RIGHT_STICK);
+	
+	Timer timer = new Timer();
 
 
 	/**
@@ -77,7 +87,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
+		while (isOperatorControl() && isEnabled()) {
+			robotDrive.tankDrive(leftStick.getY(), rightStick.getY());
+		}
 	}
 
 	/**
@@ -85,6 +97,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		LiveWindow.run();
 	}
 }
 
