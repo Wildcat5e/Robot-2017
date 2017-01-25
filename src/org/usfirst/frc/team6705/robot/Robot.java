@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		while (isOperatorControl() && isEnabled()) {
-			robotDrive.tankDrive(driveStick.getRawAxis(0), driveStick.getRawAxis(1));
+			robotDrive.tankDrive(driveStick.getRawAxis(1), driveStick.getRawAxis(2));
 		}
 		testMotor.set(0.5);
 	}
@@ -102,7 +102,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 		while (isOperatorControl() && isEnabled()) {
-			robotDrive.tankDrive(driveStick.getRawAxis(0), driveStick.getRawAxis(1));
+			robotDrive.tankDrive(driveStick.getRawAxis(1), driveStick.getRawAxis(2));
 		}
 		testMotor.set(0.5);
 	}
