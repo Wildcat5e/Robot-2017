@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 	Spark rightDriveTrain = new Spark(Constants.RIGHT_MOTOR);
 	RobotDrive robotDrive = new RobotDrive(leftDriveTrain, rightDriveTrain);
 	
-	Joystick leftStick = new Joystick(Constants.LEFT_STICK);
+	Joystick driveStick = new Joystick(Constants.DRIVE_STICK);
 	Joystick rightStick = new Joystick(Constants.RIGHT_STICK);
 	
 	Timer timer = new Timer();
@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		while (isOperatorControl() && isEnabled()) {
-			robotDrive.tankDrive(leftStick.getY(), rightStick.getY());
+			robotDrive.tankDrive(driveStick.getRawAxis(0), driveStick.getRawAxis(1));
 		}
 		testMotor.set(0.5);
 	}
@@ -102,7 +102,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 		while (isOperatorControl() && isEnabled()) {
-			robotDrive.tankDrive(leftStick.getY(), rightStick.getY());
+			robotDrive.tankDrive(driveStick.getRawAxis(0), driveStick.getRawAxis(1));
 		}
 		testMotor.set(0.5);
 	}
