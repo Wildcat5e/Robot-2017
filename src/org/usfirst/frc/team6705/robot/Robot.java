@@ -26,6 +26,8 @@ public class Robot extends IterativeRobot {
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
 	
+	Spark testMotor = new Spark(0);
+	
 	Spark leftDriveTrain = new Spark(Constants.LEFT_MOTOR);
 	Spark rightDriveTrain = new Spark(Constants.RIGHT_MOTOR);
 	RobotDrive robotDrive = new RobotDrive(leftDriveTrain, rightDriveTrain);
@@ -90,6 +92,7 @@ public class Robot extends IterativeRobot {
 		while (isOperatorControl() && isEnabled()) {
 			robotDrive.tankDrive(leftStick.getY(), rightStick.getY());
 		}
+		testMotor.set(0.5);
 	}
 
 	/**
@@ -98,6 +101,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+		while (isOperatorControl() && isEnabled()) {
+			robotDrive.tankDrive(leftStick.getY(), rightStick.getY());
+		}
+		testMotor.set(0.5);
 	}
 }
 
