@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 	final String defaultForwardPlaceGearAuto = "Default";
 	/*this is my comment*/
-	final String customAuto = "My Auto";
+	final String customAuto = "Custom Auto";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
 	
@@ -44,8 +44,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addDefault("Default Auto", defaultForwardPlaceGearAuto);
-		chooser.addObject("My Auto", customAuto);
+		chooser.addDefault("Default Auto - Forward Place Gear", defaultForwardPlaceGearAuto);
+		chooser.addObject("Auto - Custom Auto", customAuto);
 		SmartDashboard.putData("Auto choices", chooser);
 	}
 
@@ -92,7 +92,6 @@ public class Robot extends IterativeRobot {
 		while (isOperatorControl() && isEnabled()) {
 			robotDrive.tankDrive(driveStick.getRawAxis(2), driveStick.getRawAxis(5));
 		}
-		testMotor.set(0.5);
 	}
 
 	/**
@@ -101,9 +100,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
-		while (isOperatorControl() && isEnabled()) {
-			robotDrive.tankDrive(driveStick.getRawAxis(2), driveStick.getRawAxis(5));
-		}
+		robotDrive.tankDrive(driveStick.getRawAxis(2), driveStick.getRawAxis(5));
 		testMotor.set(0.5);
 	}
 }
